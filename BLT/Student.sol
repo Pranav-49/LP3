@@ -1,41 +1,37 @@
-// SPDX-License-Identifier: UNLICENSED
+// SPDX-License-Identifier: MIT
+
 pragma solidity ^0.8.0;
 
-contract StudentData {
-
-    struct Student {
+contract StudentData 
+{
+    struct Student 
+    {
+        uint256 rollNo;
         string name;
-        uint rollno;
+        uint256 age;
     }
 
-    Student[] public studentArr;
+    Student[] public students;
 
-    function addStudent(string memory name, uint rollno) public {
-        for (uint i = 0; i < studentArr.length; i++) {
-            if (studentArr[i].rollno == rollno) {
-                revert("Student with roll no already exists!");
-            }
-        }
-        studentArr.push(Student(name, rollno));
+    event StudentAdded(uint256 rollNo, string name, uint256 age);
+
+    function addStudent(uint256 _rollNo, string memory _name, uint256 _age) public 
+    {
+        students.push(Student(_rollNo, _name, _age));
+        emit StudentAdded(_rollNo, _name, _age);
     }
 
-    function displayAllStudents() public view returns (Student[] memory) {
-        return studentArr;
+    function getStudent(uint256 index) public view returns (uint256, string memory, uint256) 
+    {
+        require(index < students.length, "Invalid index");
+        Student memory s = students[index];
+        return (s.rollNo, s.name, s.age);
+    }  
+
+    fallback() external payable 
+    {
+        // Eat 5star but doo nothing
     }
 
-
-    function getLengthOfStudents() public view returns (uint) {
-        return studentArr.length;
-    }
-
-    event FundsReceived(address sender, uint amount);
-    event FallbackTriggered(address sender, uint amount, bytes data);
-
-    receive() external payable {
-        emit FundsReceived(msg.sender, msg.value);
-    }
-
-    fallback() external payable {
-        emit FallbackTriggered(msg.sender, msg.value, msg.data);
-    }
+    receive() external payable {}
 }

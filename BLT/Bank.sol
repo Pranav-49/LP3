@@ -1,20 +1,33 @@
-//SPDX-License-Identifier: MIT
-pragma solidity ^0.8.0;
+//SPDX-License-Identifier: BankSystem
 
-contract Bank {
-    uint256 balence = 0;
+pragma solidity ^0.8.26;
 
-    function withdrawal() public payable{
-        require(msg.value < balence, "Insuffiecent balence");
-        balence -= msg.value;
-    } 
 
-    function deposite() public payable{
-        require(msg.value > 0, "Amount sould be greater than zero");
-        balence += msg.value;
+contract SimpleBank 
+{
+    address public owner;
+    uint256 public balance;
+
+    constructor() 
+    {
+        owner = msg.sender;
+        balance = 0;
     }
 
-    function show() public view returns(uint){
-        return balence;
+    function deposit(uint256 amount) public payable
+    {
+        require(msg.sender == owner, "Only the owner can deposit money");
+        balance += amount;
+    }
+
+    function withdraw(uint256 amount) public payable
+    {
+        require(msg.sender == owner, "Only the owner can withdraw money");
+        require(amount <= balance, "Insufficient balance");
+        balance -= amount;
+    }
+
+    function getBalance() public view returns (uint256) {
+        return balance;
     }
 }
