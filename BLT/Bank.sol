@@ -5,8 +5,8 @@ pragma solidity ^0.8.26;
 
 contract SimpleBank 
 {
-    address public owner;
-    uint256 public balance;
+    address private owner;
+    uint256 private balance;
 
     constructor() 
     {
