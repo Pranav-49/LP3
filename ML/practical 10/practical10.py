@@ -1,21 +1,18 @@
 # Q: Implement Gradient Descent Algorithm to find local minima of y = (x + 3)^2
 
-# ---------------- Step 1: Import Library ----------------
 import matplotlib.pyplot as plt
 
-# ---------------- Step 2: Define Function and Derivative ----------------
+
 def function(x):
-    return (x + 3)**2   # y = (x + 3)^2
+    return (x + 3)**2  
 
 def derivative(x):
-    return 2 * (x + 3)  # dy/dx = 2(x + 3)
+    return 2 * (x + 3) 
 
-# ---------------- Step 3: Gradient Descent Parameters ----------------
-x = 2.0            # Starting point
+x = 2.0            
 learning_rate = 0.1
-epochs = 50        # Number of iterations
+epochs = 50       
 
-# ---------------- Step 4: Perform Gradient Descent ----------------
 x_values = [x]
 for i in range(epochs):
     grad = derivative(x)
@@ -23,11 +20,9 @@ for i in range(epochs):
     x_values.append(x)
     print(f"Iteration {i+1}: x = {x:.5f}, f(x) = {function(x):.5f}")
 
-# ---------------- Step 5: Final Result ----------------
-print("\n✅ Local Minima occurs at x =", round(x, 4))
+print("\n Local Minima occurs at x =", round(x, 4))
 print("Function value at minima y =", round(function(x), 4))
 
-# ---------------- Step 6: Visualization ----------------
 import numpy as np
 X = np.linspace(-10, 5, 100)
 Y = function(X)
