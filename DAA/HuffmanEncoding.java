@@ -66,3 +66,7 @@ public class HuffmanEncoding
         printCode(root, "");
     }
 }
+
+// Complexity:
+// Time  : O(n log n)
+// Space : O(n)

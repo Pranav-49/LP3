@@ -32,3 +32,5 @@ public class KnapsackDP
         System.out.println("Maximum value in Knapsack = " + knapSack(W, wt, val, n));
     }
 }
+
+//time and space complexity O(n*W)

@@ -56,3 +56,6 @@ public class FractionalKnapsack
         System.out.println("Maximum value in Knapsack = " + maxValue);
     }
 }
+
+//  Total Time Complexity : O(n log n)
+//  Space Complexity      : O(1)
