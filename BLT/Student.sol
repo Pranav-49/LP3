@@ -1,5 +1,4 @@
 // SPDX-License-Identifier: MIT
-
 pragma solidity ^0.8.0;
 
 contract StudentData 
@@ -26,12 +25,21 @@ contract StudentData
         require(index < students.length, "Invalid index");
         Student memory s = students[index];
         return (s.rollNo, s.name, s.age);
-    }  
-
-    fallback() external payable 
-    {
-        // Eat 5star but doo nothing
     }
 
-    receive() external payable {}
+    function getAllStudents() public view returns (Student[] memory) 
+    {
+        return students;
+    }
+
+    event LogFallback(string message);
+    event LogReceive(string message);
+
+    fallback() external payable {
+        emit LogFallback("Fallback function executed");
+    }
+
+    receive() external payable {
+        emit LogReceive("Receive function executed");
+    }
 }
